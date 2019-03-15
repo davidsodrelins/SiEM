@@ -14,9 +14,7 @@ public class ClienteDAO {
 
 	public void salvar(Cliente c) throws SQLException {
 		StringBuilder sql = new StringBuilder();
-		sql.append("INSERT INTO cliente ");
-		sql.append("(nome, email, telefone) ");
-		sql.append(" VALUES (?,?,?) ");
+		sql.append("CALL PROC_IN_CLIENT(?,?,? )");
 
 		Connection conexao = ConexaoFactory.conectar();
 
@@ -28,26 +26,62 @@ public class ClienteDAO {
 
 		comando.executeUpdate();
 	}
+	
+	
+	public void excluir(Cliente c) throws SQLException {
+		StringBuilder sql = new StringBuilder();
+		sql.append("delete from cliente ");
+		sql.append("where id _cliente = ");
+		sql.append("? ");
 
-//	public static void main(String[] args) {
-//
-//		Cliente c1 = new Cliente();
-//		
-//		c1.setNome("George");
-//		c1.setEmail("george@hotmail.com");
-//		c1.setTelefone("71992032424");
-//
-//		ClienteDAO cdao = new ClienteDAO();
-//
-//		try {
-//			cdao.salvar(c1);
-//			System.out.println("Cliente Salvo!! AAewwwww");
-//
-//		} catch (SQLException e) {
-//			System.out.println("Erro ao Salvar o cliente, verique o log abaixo.");
-//			e.printStackTrace();
-//		}
-//
-//	}
+		Connection conexao = ConexaoFactory.conectar();
+
+		PreparedStatement comando = conexao.prepareStatement(sql.toString());
+
+		comando.setLong(1, c.getId_cliente());
+
+		comando.executeUpdate();
+	}
+	
+	public void editar(Cliente c) throws SQLException {
+		StringBuilder sql = new StringBuilder();
+		sql.append("CALL PROC_UP_CLIENT(?,?,?,?)");
+
+		Connection conexao = ConexaoFactory.conectar();
+
+		PreparedStatement comando = conexao.prepareStatement(sql.toString());
+
+		comando.setString(1, c.getNome());
+		comando.setString(2, c.getEmail());
+		comando.setString(3, c.getTelefone());
+		comando.setLong(4, c.getId_cliente());
+
+		comando.executeUpdate();
+	}
+	
+	
+	public static void main(String[] args) {
+
+		Cliente c1 = new Cliente();
+		
+		c1.setNome("reste");
+		c1.setEmail("test@hotmail.com");
+		c1.setTelefone("rrr");
+		c1.setId_cliente(2L);
+
+		ClienteDAO cdao = new ClienteDAO();
+
+		try {
+			cdao.editar(c1);
+			System.out.println("Cliente editado!! AAewwwww");
+
+		} catch (SQLException e) {
+			System.out.println("Erro ao editar o cliente, verique o log abaixo.");
+			e.printStackTrace();
+		}
+
+		
+		
+	}
 
 }
