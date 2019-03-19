@@ -59,6 +59,18 @@ public class ClienteDAO {
 		comando.executeUpdate();
 	}
 	
+	public Cliente buscarPorCodigo(Cliente c) throws SQLException {
+		
+		Cliente pesquisa = new Cliente();
+			
+		return pesquisa;
+	}	
+	
+	public void listar() throws SQLException {
+		
+			
+	}
+	
 	
 	public static void main(String[] args) {
 
