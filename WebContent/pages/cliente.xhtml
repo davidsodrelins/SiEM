@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/modeloSistema.xhtml">
+
+	<ui:define name="menu">
+		<ui:include src="/includes/menuPrincipal.xhtml"></ui:include>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form>
+			<p:dataTable value="#{MBCliente.clientes}" var="cliente"
+				emptyMessage="Nenhum cliente foi encotrado." paginator="true"
+				rows="10">
+
+				<p:column headerText="Código" sortBy="#{cliente.id_cliente}"
+					filterBy="#{cliente.id_cliente}">
+					<h:outputText value="#{cliente.id_cliente}" />
+				</p:column>
+
+				<p:column headerText="Nome" sortBy="#{cliente.nome}"
+					filterBy="#{cliente.nome}">
+					<h:outputText value="#{cliente.nome}" />
+				</p:column>
+
+				<p:column headerText="Email" sortBy="#{cliente.email}"
+					filterBy="#{cliente.email}">
+					<h:outputText value="#{cliente.email}" />
+				</p:column>
+
+				<p:column headerText="Telefone" sortBy="#{cliente.telefone}"
+					filterBy="#{cliente.telefone}">
+					<h:outputText value="#{cliente.telefone}" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

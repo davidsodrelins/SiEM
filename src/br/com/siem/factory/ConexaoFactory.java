@@ -15,6 +15,8 @@ public class ConexaoFactory {
 	private static final String URL = "jdbc:mysql://localhost:3306/mydb";
 
 	public static Connection conectar() throws SQLException {
+		//Se sua conexão der erro, decomente a linha abaixo
+		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		Connection conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
 		return conexao;
 	}

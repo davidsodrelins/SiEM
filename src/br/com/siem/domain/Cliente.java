@@ -42,5 +42,13 @@ public class Cliente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	//criar o toStringo (overload) 
+	
+	@Override
+	public String toString() { 
+		String saida ="ID: "+ id_cliente + " - Nome: " + nome + " - Email: " + email + " - Telefone: " + telefone ;
+		return saida;
+	}
 
 }
