@@ -10,33 +10,27 @@
 	<ui:define name="menu">
 		<ui:include src="/includes/menuPrincipal.xhtml"></ui:include>
 	</ui:define>
-
 	<ui:define name="conteudo">
 		<h:form>
 			<p:dataTable value="#{MBCliente.clientes}" var="cliente"
 				emptyMessage="Nenhum cliente foi encotrado." paginator="true"
 				rows="10">
-
 				<p:column headerText="Código" sortBy="#{cliente.id_cliente}"
 					filterBy="#{cliente.id_cliente}">
 					<h:outputText value="#{cliente.id_cliente}" />
 				</p:column>
-
 				<p:column headerText="Nome" sortBy="#{cliente.nome}"
 					filterBy="#{cliente.nome}">
 					<h:outputText value="#{cliente.nome}" />
 				</p:column>
-
 				<p:column headerText="Email" sortBy="#{cliente.email}"
 					filterBy="#{cliente.email}">
 					<h:outputText value="#{cliente.email}" />
 				</p:column>
-
 				<p:column headerText="Telefone" sortBy="#{cliente.telefone}"
 					filterBy="#{cliente.telefone}">
 					<h:outputText value="#{cliente.telefone}" />
 				</p:column>
-
 			</p:dataTable>
 		</h:form>
 	</ui:define>
