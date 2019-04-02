@@ -11,10 +11,12 @@
 		<ui:include src="/includes/menuPrincipal.xhtml"></ui:include>
 	</ui:define>
 	<ui:define name="conteudo">
-		<h:form>
-			<p:dataTable value="#{MBCliente.clientes}" var="cliente"
+		<h:form id="formularioClientesLista">
+			<p:dataTable id="tabelaClientes" value="#{MBCliente.clientes}" var="cliente"
 				emptyMessage="Nenhum cliente foi encotrado." paginator="true"
 				rows="10">
+				<f:facet name="header"> Lista de Clientes</f:facet>
+				
 				<p:column headerText="Código" sortBy="#{cliente.id_cliente}"
 					filterBy="#{cliente.id_cliente}">
 					<h:outputText value="#{cliente.id_cliente}" />
@@ -31,7 +33,59 @@
 					filterBy="#{cliente.telefone}">
 					<h:outputText value="#{cliente.telefone}" />
 				</p:column>
+				
+				<f:facet name="footer"> 
+					<p:commandButton value="Novo" 
+					actionListener="#{MBCliente.prepararNovoCliente}" 
+					oncomplete="PF('dlgClienteNovo').show();"
+					update=":formularioClienteNovo:painelClienteNovo"/>
+				</f:facet>
+				
 			</p:dataTable>
 		</h:form>
+			
+		<p:dialog widgetVar="dlgClienteNovo" closable="false" 
+				  draggable="false" resizable="false"
+				  header="Cliente - Novo" modal="true"
+				  appendTo="@(body)"> <!-- //o dialog e a pesquisa são objetos distintos! -->
+			
+			<h:form id="formularioClienteNovo">
+				<h:panelGrid id="painelClienteNovo" columns="2">
+					<p:outputLabel value="Nome"/>
+					<p:inputText size="40" maxlength="255" value="#{MBCliente.cliente.nome}"/>
+					<p:outputLabel value="Email"/>
+					<p:inputText size="40" maxlength="255" value="#{MBCliente.cliente.email}"/>
+					<p:outputLabel value="Telefone"/>
+					<p:inputText size="40" maxlength="255" value="#{MBCliente.cliente.telefone}"/>
+				</h:panelGrid>
+				
+				
+				
+				<h:panelGrid>
+					<p:commandButton value="Salvar" actionListener="#{MBCliente.novo}" 
+									oncomplete="PF('dlgClienteNovo').hide();"
+									update=":formularioClientesLista:tabelaClientes"/>
+					<p:commandButton value="Cancelar" onclick="PF('dlgClienteNovo').hide();"/>
+				</h:panelGrid>
+				
+				
+			</h:form>
+			
+		</p:dialog>
 	</ui:define>
 </ui:composition>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
