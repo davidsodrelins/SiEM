@@ -60,19 +60,53 @@ public class ClienteDAO {
 
 	public Cliente buscarPorCodigo(Cliente c) throws SQLException {
 
-		
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("CALL PROC_SEL_CLIENTE_BYID(?)");
+
+		Connection conexao = ConexaoFactory.conectar();
+
+		PreparedStatement comando = conexao.prepareStatement(sql.toString());
+		comando.setLong(1, c.getId_cliente());
+
+		ResultSet resultado = comando.executeQuery();
 
 		Cliente pesquisa = null;
 
-		
+		if (resultado.next()) {
+			pesquisa = new Cliente();
+			pesquisa.setId_cliente(resultado.getLong("idcliente"));
+			pesquisa.setNome(resultado.getString("nome"));
+			pesquisa.setEmail(resultado.getString("email"));
+			pesquisa.setTelefone(resultado.getString("telefone"));
+		}
+
 		return pesquisa;
 	}
 
 	public ArrayList<Cliente> listar() throws SQLException {
 
+		StringBuilder sql = new StringBuilder();
+		sql.append("CALL PROC_SEL_CLIENT()");
+
+		Connection conexao = ConexaoFactory.conectar();
+		PreparedStatement comando = conexao.prepareStatement(sql.toString());
+
+		ResultSet resultado = comando.executeQuery(); // o resultSet recebe o resultado do executeQuery
 
 		ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
 
+		while (resultado.next()) { // enquando eu tiver dados a serem consumidos, eu vou para o próximo.
+
+			Cliente c = new Cliente();
+
+			c.setId_cliente(resultado.getLong("idcliente"));
+			c.setNome(resultado.getString("nome"));
+			c.setEmail(resultado.getString("email"));
+			c.setTelefone(resultado.getString("telefone"));
+
+			listaClientes.add(c); //não esquecer de adicionar o objeto ao array!!
+		}
 		return listaClientes; //retorna a lista de clientes
 	}
 
