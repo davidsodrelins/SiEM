@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
-		xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:f="http://java.sun.com/jsf/core"
-		xmlns:p="http://primefaces.org/ui"
-		xmlns:ui="http://java.sun.com/jsf/facelets">
-		
-		<h:form>
-			<p:menubar>
-				<p:submenu label="Cliente">
-					<p:menuitem value="Cadastrar"/>
-					<p:menuitem value="Editar"/>
-					<p:submenu label="Buscar">
-						<p:menuitem value="Buscar por Código"/>
-						<p:menuitem value="Buscar por Nome"/>
-						<p:menuitem value="Buscar por E-mail"/>
-						<p:menuitem value="Busca inteligente"/>
-					</p:submenu>
-					<p:menuitem value="Excluir"/>
-				</p:submenu>	
-				
-				<p:submenu label="Email">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:form>
+		<p:menubar>
+			<p:submenu label="Cliente">
+				<p:menuitem value="Cadastrar" actionListener="#{MBCliente.prepararNovoCliente}"
+						oncomplete="PF('dlgClienteNovo').show();"
+						update=":formularioClienteNovo:painelClienteNovo">
+					
+				</p:menuitem>
+				<p:menuitem value="Editar" />
+
+				<p:submenu label="Buscar">
+					<p:menuitem value="Buscar por Código" />
+					<p:menuitem value="Buscar por Nome" />
+					<p:menuitem value="Buscar por E-mail" />
+					<p:menuitem value="Busca inteligente" />
 				</p:submenu>
-				
-				<p:submenu label="Relatórios">
-				</p:submenu>
-			</p:menubar>
-		</h:form>
-		
-		
+				<p:menuitem value="Excluir" />
+			</p:submenu>
+
+			<p:submenu label="Email">
+			</p:submenu>
+
+			<p:submenu label="Relatórios">
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+
+
 </ui:composition>

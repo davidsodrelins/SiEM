@@ -8,21 +8,19 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>SiEM - Sistema de Email Marketing</title>
-	<h:outputStylesheet library="css" name="style.css"/>
-	
+	<h:outputStylesheet library="css" name="style.css" />
+
 </h:head>
 <h:body>
+
+	<p:growl id="msgGlobal" life="5000" />
 	<p:layout fullPage="true">
 		<p:layoutUnit position="north" closable="true">
 			<ui:insert name="menu" />
 		</p:layoutUnit>
-
 		<p:layoutUnit position="center">
 			<ui:insert name="conteudo" />
 		</p:layoutUnit>
-
- 
-
 	</p:layout>
 </h:body>
 
